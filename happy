@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The End</title>
+    <style>
+        body {
+            background-color: black;
+            color: red;
+            font-family: 'Courier New', Courier, monospace;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            flex-direction: column;
+        }
+        h1 {
+            font-size: 3em;
+        }
+        .start-button, .option-button {
+            background-color: darkred;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.5em;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: transform 0.2s;
+        }
+        .start-button:hover, .option-button:hover {
+            transform: scale(1.1);
+        }
+        .hidden {
+            display: none;
+        }
+        .page-content {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <!-- Main Page -->
+    <div id="main-page">
+        <h1>The End</h1>
+        <button class="start-button" onclick="showOptions()">Start</button>
+    </div>
+
+    <!-- Option Selection Page -->
+    <div id="option-page" class="hidden">
+        <button class="option-button" onclick="showPage('not-clear')">Option 1</button>
+        <button class="option-button" onclick="showPage('second-options')">Option 2</button>
+        <button class="option-button" onclick="showPage('random-college')">Option 3</button>
+    </div>
+
+    <!-- Not Clear Page -->
+    <div id="not-clear-page" class="hidden page-content">
+        <h1>You Will Not Clear IIT</h1>
+    </div>
+
+    <!-- Second Options Page -->
+    <div id="second-options-page" class="hidden page-content">
+        <button class="option-button" onclick="showPage('jee-advanced')">JEE Advanced Score</button>
+        <button class="option-button" onclick="showPage('jee-mains')">JEE Mains Score</button>
+    </div>
+
+    <!-- JEE Advanced Score Page -->
+    <div id="jee-advanced-page" class="hidden page-content">
+        <h1>Your JEE Advanced Score is: <span id="jee-advanced-score"></span>/360</h1>
+    </div>
+
+    <!-- JEE Mains Score Page -->
+    <div id="jee-mains-page" class="hidden page-content">
+        <h1>Your JEE Mains Score is: <span id="jee-mains-score"></span>/300</h1>
+    </div>
+
+    <!-- Random College Page -->
+    <div id="random-college-page" class="hidden page-content">
+        <h1>You are going to: <span id="random-college"></span></h1>
+    </div>
+
+    <script>
+        function showOptions() {
+            document.getElementById('main-page').classList.add('hidden');
+            document.getElementById('option-page').classList.remove('hidden');
+        }
+
+        function showPage(page) {
+            // Hide all pages
+            document.getElementById('option-page').classList.add('hidden');
+            document.getElementById('not-clear-page').classList.add('hidden');
+            document.getElementById('second-options-page').classList.add('hidden');
+            document.getElementById('jee-advanced-page').classList.add('hidden');
+            document.getElementById('jee-mains-page').classList.add('hidden');
+            document.getElementById('random-college-page').classList.add('hidden');
+
+            // Show selected page
+            if (page === 'not-clear') {
+                document.getElementById('not-clear-page').classList.remove('hidden');
+            } else if (page === 'second-options') {
+                document.getElementById('second-options-page').classList.remove('hidden');
+            } else if (page === 'jee-advanced') {
+                document.getElementById('jee-advanced-page').classList.remove('hidden');
+                document.getElementById('jee-advanced-score').textContent = Math.floor(Math.random() * 200);
+            } else if (page === 'jee-mains') {
+                document.getElementById('jee-mains-page').classList.remove('hidden');
+                document.getElementById('jee-mains-score').textContent = Math.floor(Math.random() * 200);
+            } else if (page === 'random-college') {
+                document.getElementById('random-college-page').classList.remove('hidden');
+                const colleges = ["VITEEE", "MS Ramiah", "Purnia College", "LPU", "Bihar Engineering"];
+                document.getElementById('random-college').textContent = colleges[Math.floor(Math.random() * colleges.length)];
+            }
+        }
+    </script>
+</body>
+</html>
